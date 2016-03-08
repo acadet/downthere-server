@@ -1,0 +1,33 @@
+class TextFilesController < ApplicationController
+  def index
+    @files = TextFile.by_name
+
+    respond_to do |f|
+      f.html
+      f.json { render json: @files, status: :ok }
+    end
+  end
+
+  def new
+    @file = TextFile.new
+  end
+
+  def create
+    @file = TextFile.new text_file_params
+
+    if @file.save
+      redirect_to text_files_path
+    end
+  end
+
+  def destroy
+    @file = TextFile.find params[:id]
+    @file.destroy
+    redirect_to text_files_path
+  end
+
+  private
+  def text_file_params
+    params.require(:text_file).permit(:name, :attachment)
+  end
+end

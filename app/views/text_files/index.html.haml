@@ -1,0 +1,8 @@
+=  link_to 'Upload new file', new_text_file_path
+
+%ul
+- @files.each do |f|
+  %li
+    %p= f.name
+    %p= f.updated_at
+    %p= button_to 'Delete', f, method: :delete

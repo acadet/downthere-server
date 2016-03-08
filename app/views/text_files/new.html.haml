@@ -1,0 +1,11 @@
+- unless @file.errors.empty?
+  .error
+    - @file.errors.full_messages.each do |msg|
+      %p= msg
+
+= form_for @file, html: {multipart: true } do |f|
+  = f.label :name
+  = f.text_field :name
+  = f.label :attachment
+  = f.file_field :attachment
+  = f.submit "Save"
