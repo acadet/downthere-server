@@ -1,0 +1,8 @@
+=  link_to 'Upload new picture', new_picture_path
+
+%ul
+- @pictures.each do |p|
+  %li
+    %p= p.name
+    %p= p.updated_at
+    %p= button_to 'Delete', p, method: :delete

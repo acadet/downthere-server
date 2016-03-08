@@ -17,6 +17,8 @@ class TextFilesController < ApplicationController
 
     if @file.save
       redirect_to text_files_path
+    else
+      render 'new'
     end
   end
 
