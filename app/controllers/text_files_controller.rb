@@ -22,6 +22,15 @@ class TextFilesController < ApplicationController
     end
   end
 
+  def show
+    @file = TextFile.find(params[:id])
+
+    respond_to do |f|
+      f.html
+      f.json { render json: @file, status: :ok }
+    end
+  end
+
   def destroy
     @file = TextFile.find params[:id]
     @file.destroy

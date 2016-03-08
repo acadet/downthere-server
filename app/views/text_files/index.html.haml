@@ -5,4 +5,5 @@
   %li
     %p= f.name
     %p= f.updated_at
+    %p= link_to 'Download', f.attachment_url
     %p= button_to 'Delete', f, method: :delete
