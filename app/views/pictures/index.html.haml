@@ -5,4 +5,5 @@
   %li
     %p= p.name
     %p= p.updated_at
+    %p= image_tag(p.attachment_url, width: "150")
     %p= button_to 'Delete', p, method: :delete

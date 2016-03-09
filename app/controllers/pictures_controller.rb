@@ -4,7 +4,7 @@ class PicturesController < ApplicationController
 
     respond_to do |f|
       f.html
-      f.json { render json: @pictures, status: :ok }
+      f.json { render json: @pictures.by_date, status: :ok }
     end
   end
 
