@@ -23,7 +23,8 @@ class TextFilesController < ApplicationController
   end
 
   def show
-    @file = TextFile.find(params[:id])
+    @file      = TextFile.find(params[:id])
+    @file.name = @file.attachment.file.basename
 
     respond_to do |f|
       f.html

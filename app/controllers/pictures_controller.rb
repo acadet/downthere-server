@@ -4,7 +4,7 @@ class PicturesController < ApplicationController
 
     respond_to do |f|
       f.html
-      f.json { render json: @pictures.by_date, status: :ok }
+      f.json { render json: Picture.by_date.by_name, status: :ok }
     end
   end
 
@@ -13,7 +13,8 @@ class PicturesController < ApplicationController
   end
 
   def create
-    @picture = Picture.new picture_params
+    @picture      = Picture.new picture_params
+    @picture.name = @picture.attachment.file.basename
 
     if @picture.save
       redirect_to pictures_path
@@ -30,6 +31,6 @@ class PicturesController < ApplicationController
 
   private
   def picture_params
-    params.require(:picture).permit(:name, :attachment)
+    params.require(:picture).permit(:attachment)
   end
 end
