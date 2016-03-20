@@ -13,7 +13,8 @@ class TextFilesController < ApplicationController
   end
 
   def create
-    @file = TextFile.new text_file_params
+    @file      = TextFile.new text_file_params
+    @file.name = @file.attachment.file.basename
 
     if @file.save
       redirect_to text_files_path
@@ -23,8 +24,7 @@ class TextFilesController < ApplicationController
   end
 
   def show
-    @file      = TextFile.find(params[:id])
-    @file.name = @file.attachment.file.basename
+    @file = TextFile.find(params[:id])
 
     respond_to do |f|
       f.html
