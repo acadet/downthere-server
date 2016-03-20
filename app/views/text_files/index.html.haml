@@ -1,9 +1,12 @@
-=  link_to 'Upload new file', new_text_file_path
+.list
+  .upload-wrapper
+    = link_to 'Upload a new file', new_text_file_path
 
-%ul
-- @files.each do |f|
-  %li
-    %p= f.name
-    %p= f.updated_at
-    %p= link_to 'Download', f.attachment_url
-    %p= button_to 'Delete', f, method: :delete
+  %ul.files
+    - @files.each do |f|
+      %li
+        .details
+          %p.filename= f.name
+          %p= "#{time_ago_in_words(f.updated_at)} ago"
+          %p= link_to 'Download', f.attachment_url, class: 'download-button', download: 'download'
+          = button_to 'Delete', f, method: :delete, class: 'delete-button'

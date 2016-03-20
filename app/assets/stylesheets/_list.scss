@@ -49,17 +49,20 @@
     @include display(flex);
     @include flex-direction(row);
     @include flex-wrap(wrap);
+    @include justify-content(center);
 
     li {
       @include flex(1);
-      max-width: 500px;
       margin: 1rem;
-      padding: 1rem;
+      padding: 1rem 2rem;
+      box-sizing: border-box;
 
       background-color: $soft-grey;
     }
 
     p {
+      margin: .5rem;
+
       color: $black;
       font: {
         size: 1rem;
@@ -70,38 +73,48 @@
       }
     }
 
-    .delete-button {
+    @mixin button($foreground, $background) {
       padding: .5rem 1rem;
 
       font: {
         size: .9rem;
       }
-      color: $black;
+      color: $foreground;
       text-transform: uppercase;
 
       cursor: pointer;
       outline: none;
-      border: 2px solid $black;
+      border: 2px solid $foreground;
       background: transparent;
       @include transition((background-color .2s ease, color .2s ease));
 
       &:hover {
-        color: $white;
+        color: $background;
 
-        background-color: $black;
+        background-color: $foreground;
       }
     }
-  }
 
-  .pictures li {
-    img {
-      width: 100%;
+    .delete-button {
+      @include button($black, $white);
+    }
+
+    .download-button {
+      @include button($grey, $white);
+      text-decoration: none;
     }
 
     .details {
       @include display(flex);
       @include justify-content(space-between);
       @include align-items(center);
+    }
+  }
+
+  .pictures li {
+    max-width: 500px;
+    img {
+      width: 100%;
     }
   }
 }
