@@ -1,9 +1,13 @@
-- unless @file.errors.empty?
-  .error
-    - @file.errors.full_messages.each do |msg|
-      %p= msg
+.upload-form
+  %h1 Upload a new text file
 
-= form_for @file, html: {multipart: true } do |f|
-  = f.label :attachment
-  = f.file_field :attachment
-  = f.submit "Save"
+  - unless @file.errors.empty?
+    .error
+      - @file.errors.full_messages.each do |msg|
+        %p= msg
+
+  = form_for @file, html: {multipart: true } do |f|
+    %p
+      = f.file_field :attachment, class: 'attachment-button'
+    %p.right
+      = f.submit "Save", class: 'save-button'

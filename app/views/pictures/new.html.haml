@@ -1,9 +1,13 @@
-- unless @picture.errors.empty?
-  .error
-    - @picture.errors.full_messages.each do |msg|
-      %p= msg
+.upload-form
+  %h1 Upload a new picture
 
-= form_for @picture, html: {multipart: true } do |f|
-  = f.label :attachment
-  = f.file_field :attachment
-  = f.submit "Save"
+  - unless @picture.errors.empty?
+    .error
+      - @picture.errors.full_messages.each do |msg|
+        %p= msg
+
+  = form_for @picture, html: {multipart: true } do |f|
+    %p
+      = f.file_field :attachment, class: 'attachment-button'
+    %p.right
+      = f.submit "Save", class: 'save-button'
