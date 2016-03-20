@@ -1,9 +1,12 @@
-=  link_to 'Upload new picture', new_picture_path
+.list
+  .upload-wrapper
+    =  link_to 'Upload new picture', new_picture_path
 
-%ul
-- @pictures.each do |p|
-  %li
-    %p= p.name
-    %p= p.updated_at
-    %p= image_tag(p.attachment_url, width: "150")
-    %p= button_to 'Delete', p, method: :delete
+  %ul.pictures
+    - @pictures.each do |p|
+      %li
+        = image_tag(p.attachment_url)
+        .details
+          %p.filename= p.name
+          %p= "#{time_ago_in_words(p.updated_at)} ago"
+          = button_to 'Delete', p, method: :delete, class: 'delete-button'

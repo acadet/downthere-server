@@ -28,16 +28,16 @@
     border-bottom: 2px solid transparent;
     @include transition(border-color .2s ease);
 
+    &:visited {
+      color: $blue;
+      text-decoration: none;
+    }
+
     &:hover {
       color: $blue;
       text-decoration: none;
 
       border-color: $blue;
-    }
-
-    &:visited {
-      color: $blue;
-      text-decoration: none;
     }
   }
 }
