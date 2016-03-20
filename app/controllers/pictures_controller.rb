@@ -14,7 +14,7 @@ class PicturesController < ApplicationController
 
   def create
     @picture      = Picture.new picture_params
-    @picture.name = @picture.attachment.file.basename
+    @picture.name = @picture.attachment.file.basename unless @picture.attachment.file.nil?
 
     if @picture.save
       redirect_to pictures_path

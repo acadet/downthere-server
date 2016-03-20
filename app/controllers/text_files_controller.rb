@@ -14,7 +14,7 @@ class TextFilesController < ApplicationController
 
   def create
     @file      = TextFile.new text_file_params
-    @file.name = @file.attachment.file.basename
+    @file.name = @file.attachment.file.basename unless @file.attachment.file.nil?
 
     if @file.save
       redirect_to text_files_path
