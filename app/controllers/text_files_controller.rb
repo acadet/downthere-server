@@ -1,6 +1,6 @@
 class TextFilesController < ApplicationController
   def index
-    @files = TextFile.by_name
+    @files = TextFile.by_date.by_name
 
     respond_to do |f|
       f.html

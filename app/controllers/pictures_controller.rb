@@ -1,10 +1,10 @@
 class PicturesController < ApplicationController
   def index
-    @pictures = Picture.by_name
+    @pictures = Picture.by_date.by_name
 
     respond_to do |f|
       f.html
-      f.json { render json: Picture.by_date.by_name, status: :ok }
+      f.json { render json: @pictures, status: :ok }
     end
   end
 
