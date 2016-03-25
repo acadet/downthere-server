@@ -1,4 +1,7 @@
 class TextFilesController < ApplicationController
+
+  include FilePickerModule
+
   def index
     @files = TextFile.by_date.by_name
 
@@ -13,13 +16,17 @@ class TextFilesController < ApplicationController
   end
 
   def create
-    @file      = TextFile.new text_file_params
-    @file.name = @file.attachment.file.basename unless @file.attachment.file.nil?
+    @file      = TextFile.new
+    upload = FilePickerModule.upload_text_file text_file_params[:attachment]
 
-    if @file.save
-      redirect_to text_files_path
-    else
+    if upload.has_key? :error
+      @error = upload[:error]
       render 'new'
+    else
+      @file.name = upload[:filename]
+      @file.attachment = upload[:url]
+      @file.save
+      redirect_to text_files_path
     end
   end
 
@@ -34,6 +41,7 @@ class TextFilesController < ApplicationController
 
   def destroy
     @file = TextFile.find params[:id]
+    FilePickerModule.delete @file.attachment
     @file.destroy
     redirect_to text_files_path
   end

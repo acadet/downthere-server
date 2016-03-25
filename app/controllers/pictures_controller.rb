@@ -17,7 +17,7 @@ class PicturesController < ApplicationController
 
   def create
     @picture      = Picture.new
-    upload = FilePickerModule.upload_picture params[:picture][:attachment]
+    upload = FilePickerModule.upload_picture picture_params[:attachment]
 
     if upload.has_key? :error
       @error = upload[:error]
