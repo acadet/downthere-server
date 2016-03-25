@@ -8,5 +8,5 @@
         .details
           %p.filename= f.name
           %p= "#{time_ago_in_words(f.updated_at)} ago"
-          %p= link_to 'Download', f.attachment_url, class: 'download-button', download: 'download'
+          %p= link_to 'Download', f.attachment, class: 'download-button', download: 'download'
           = button_to 'Delete', f, method: :delete, class: 'delete-button'
