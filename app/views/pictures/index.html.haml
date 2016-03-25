@@ -5,7 +5,7 @@
   %ul.pictures
     - @pictures.each do |p|
       %li
-        = image_tag(p.attachment_url)
+        = image_tag(p.attachment)
         .details
           %p.filename= p.name
           %p= "#{time_ago_in_words(p.updated_at)} ago"

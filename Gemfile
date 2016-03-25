@@ -32,7 +32,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'haml'
 gem 'bourbon'
 
-gem 'carrierwave'
+gem 'rest_client'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

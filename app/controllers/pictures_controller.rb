@@ -1,4 +1,7 @@
 class PicturesController < ApplicationController
+
+  include FilePickerModule
+
   def index
     @pictures = Picture.by_date.by_name
 
@@ -13,18 +16,23 @@ class PicturesController < ApplicationController
   end
 
   def create
-    @picture      = Picture.new picture_params
-    @picture.name = @picture.attachment.file.basename unless @picture.attachment.file.nil?
+    @picture      = Picture.new
+    upload = FilePickerModule.upload_picture params[:picture][:attachment]
 
-    if @picture.save
-      redirect_to pictures_path
-    else
+    if upload.has_key? :error
+      @error = upload[:error]
       render 'new'
+    else
+      @picture.name = upload[:filename]
+      @picture.attachment = upload[:url]
+      @picture.save
+      redirect_to pictures_path
     end
   end
 
   def destroy
     @picture = Picture.find params[:id]
+    FilePickerModule.delete @picture.attachment
     @picture.destroy
     redirect_to pictures_path
   end
